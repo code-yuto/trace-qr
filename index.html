@@ -68,9 +68,6 @@
     gap: clamp(20px, 4vmin, 40px);
     padding: 16px;
   }
-  @media (min-aspect-ratio: 5/4) {
-    .center { justify-self: start; margin-left: max(4vw, 50vw - 50vmin - 15vw); }
-  }
   .qr {
     position: relative;
     padding: clamp(18px, 3.5vmin, 36px);
@@ -179,12 +176,12 @@
     const layoutBox = (splitY) => {
       if (w / h >= 1.25) {
         const qr = document.querySelector(".center").getBoundingClientRect();
-        const left = qr.right + w * 0.03;
-        return { cx: (left + w) / 2, cy: splitY, w: (w - left) * 0.9, h: h * 0.7 };
+        const left = qr.right + 14;
+        return { cx: (left + w) / 2, cy: splitY, w: (w - left) * 0.6, h: h * 0.3 };
       }
       const text = document.querySelector("h1").getBoundingClientRect();
       const top = text.bottom + 16;
-      return { cx: w / 2, cy: (top + h) / 2 + 8, w: w * 0.86, h: Math.max(80, h - top - 40) };
+      return { cx: w / 2, cy: (top + h) / 2 + 8, w: w * 0.6, h: Math.max(60, (h - top) * 0.5) };
     };
 
     const stroke = (segments, yaw, view) => {
