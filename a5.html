@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>参加者URL（A5）</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
+<style>
+  @page { size: 148mm 210mm; margin: 0; }
+  :root {
+    --light: #d5d7d4;
+    --dark: #0d0d0d;
+    --grid: rgba(13, 13, 13, 0.12);
+    --split: 52%;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  body {
+    background: #888;
+    font-family: "Noto Sans JP", system-ui, sans-serif;
+  }
+  .stage {
+    position: relative;
+    width: 148mm;
+    height: 210mm;
+    margin: 0 auto;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background:
+      linear-gradient(var(--light), var(--light)) top / 100% var(--split) no-repeat,
+      var(--dark);
+  }
+  @media screen {
+    body { padding: 8mm 0; }
+  }
+  @media print {
+    body { background: none; }
+  }
+  .grid {
+    position: absolute;
+    inset: 0 0 calc(100% - var(--split)) 0;
+    background-image:
+      linear-gradient(var(--grid) 0.3mm, transparent 0.3mm),
+      linear-gradient(90deg, var(--grid) 0.3mm, transparent 0.3mm);
+    background-size: 12mm 12mm;
+  }
+  canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .corner {
+    position: absolute;
+    width: 6mm;
+    height: 6mm;
+    border: 0 solid currentColor;
+  }
+  .corner.tl { top: 6mm; left: 6mm; border-top-width: 0.5mm; border-left-width: 0.5mm; color: var(--dark); }
+  .corner.tr { top: 6mm; right: 6mm; border-top-width: 0.5mm; border-right-width: 0.5mm; color: var(--dark); }
+  .corner.bl { bottom: 6mm; left: 6mm; border-bottom-width: 0.5mm; border-left-width: 0.5mm; color: var(--light); }
+  .corner.br { bottom: 6mm; right: 6mm; border-bottom-width: 0.5mm; border-right-width: 0.5mm; color: var(--light); }
+
+  .center {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6mm;
+    margin-top: -22mm;
+  }
+  .qr {
+    position: relative;
+    padding: 6mm;
+    background: #fff;
+  }
+  .qr .mark {
+    position: absolute;
+    width: 7mm;
+    height: 7mm;
+    border: 0 solid;
+  }
+  .qr .mark.tl { top: -3.5mm; left: -3.5mm; border-top-width: 0.5mm; border-left-width: 0.5mm; border-color: var(--dark); }
+  .qr .mark.tr { top: -3.5mm; right: -3.5mm; border-top-width: 0.5mm; border-right-width: 0.5mm; border-color: var(--dark); }
+  .qr .mark.bl { bottom: -3.5mm; left: -3.5mm; border-bottom-width: 0.5mm; border-left-width: 0.5mm; border-color: var(--light); }
+  .qr .mark.br { bottom: -3.5mm; right: -3.5mm; border-bottom-width: 0.5mm; border-right-width: 0.5mm; border-color: var(--light); }
+  .qr img {
+    display: block;
+    width: 82mm;
+    height: auto;
+    image-rendering: pixelated;
+  }
+  h1 {
+    font-size: 12mm;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    color: var(--light);
+  }
+</style>
+</head>
+<body>
+<main class="stage">
+  <div class="grid" aria-hidden="true"></div>
+  <canvas id="campus" data-still aria-hidden="true"></canvas>
+  <span class="corner tl" aria-hidden="true"></span>
+  <span class="corner tr" aria-hidden="true"></span>
+  <span class="corner bl" aria-hidden="true"></span>
+  <span class="corner br" aria-hidden="true"></span>
+  <div class="center">
+    <div class="qr">
+      <span class="mark tl"></span><span class="mark tr"></span><span class="mark bl"></span><span class="mark br"></span>
+      <img src="qr.png" alt="参加者URLのQRコード">
+    </div>
+    <h1>参加者URL</h1>
+  </div>
+</main>
+<script src="campus.js"></script>
+</body>
+</html>
